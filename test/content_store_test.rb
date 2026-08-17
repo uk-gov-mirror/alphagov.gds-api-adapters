@@ -35,6 +35,12 @@ describe GdsApi::ContentStore do
         @api.content_item("/it-is-gone")
       end
     end
+
+    it "raises if the path is invalid and doesn't call content store" do
+      assert_raises(GdsApi::HTTPBadRequest) do
+        @api.content_item("/it-is-GONE")
+      end
+    end
   end
 
   describe ".redirect_for_path" do
